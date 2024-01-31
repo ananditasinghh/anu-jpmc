@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-time Data Streaming Visualization</title>
+  <script src="https://cdn.babylonjs.com/babylon.js"></script>
+</head>
+<body>
+  <canvas id="renderCanvas" style="width: 100%; height: 100%;"></canvas>
+  <script>
+    // Initialize Babylon.js scene
+    var canvas = document.getElementById("renderCanvas");
+    var engine = new BABYLON.Engine(canvas, true);
+    var scene = new BABYLON.Scene(engine);
+
+    // a simple box as a placeholder for real-time data visualization
+    var box = BABYLON.MeshBuilder.CreateBox("box", { size: 2 }, scene);
+
+    // Function to update the visualization based on real-time data
+    function updateVisualization(realTimeData) {
+      // the real-time data to dynamically update the 3D visualization
+      // the data directly affects the box's position
+      box.position.x = realTimeData.x;
+      box.position.y = realTimeData.y;
+      box.position.z = realTimeData.z;
+    }
+
+    // Simulate real-time data streaming (replace this with actual data source)
+    function simulateRealTimeDataStreaming() {
+      // Hypothetical data stream emitting data every second
+      setInterval(function() {
+        // Replace this with the logic to fetch real-time data 
+        var realTimeData = {
+          x: Math.random() * 10,
+          y: Math.random() * 10,
+          z: Math.random() * 10
+        };
+
+        // Update the visualization with the new real-time data
+        updateVisualization(realTimeData);
+      }, 1000); // Update every second
+    }
+
+    // Run the simulation
+    simulateRealTimeDataStreaming();
+
+    // Run the Babylon.js render loop
+    engine.runRenderLoop(function () {
+      scene.render();
+    });
+
+    // Handle window resize
+    window.addEventListener("resize", function () {
+      engine.resize();
+    });
+  </script>
+</body>
+</html>
